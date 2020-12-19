@@ -1,0 +1,56 @@
+#in this manager nodes and workers node are there, manager node manage workers and can also act as server. 
+#multiple manager should be used in odd number like 1,3,5,7 etc recommended
+#half the managers should be online to add workers or take some decisions, work like sort of voting/presence
+
+#to make a new manager, act as leader in manager status 
+docker swarm init
+
+#after above cmd ... a cmd will be generated, which need to be run in workers, so that they can join
+
+#to check nodes 
+docker node ls
+
+#in worker node
+docker swarm leave
+
+# to remove left workers from the list
+#manager can do this'
+
+docker node rm docker-node2 (node name)
+
+#to make more manager 
+# in manager node
+
+docker swarm join-token manager
+...will generate cmd.... 
+
+#new manager will get status of Reachable
+
+#hostname cmd is used to change hostname
+for ex 
+hostname docker-node1 or any name
+
+#to turn off node
+shutdown now
+
+#if half the managers are down
+
+docker node ls
+give error..
+
+in that case, other managers status will get removed by this
+
+docker swarm init --force-new-cluster 
+or
+docker swarm init --force-new-cluster --advertise-addr ip (ex it will show on screen)
+
+docker node ls
+
+
+
+
+
+
+
+
+
