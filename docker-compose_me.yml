@@ -1,0 +1,29 @@
+version : '3.3'
+services : 
+  voting-app :
+    image : voting-app
+    ports:
+      - "5000:80"
+    links :
+      - redis:redis
+
+
+  redis : 
+    image : redis
+  
+  worker : 
+    image : worker-app
+    links:
+      - db:db
+      - redis:redis
+  db : 
+    image : postgres:9.4
+    links:
+      -db:db
+
+  result-app:
+   image :  result-app
+   links : 
+    - db
+   ports : 
+      -5001:80
